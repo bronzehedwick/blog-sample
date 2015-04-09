@@ -58,7 +58,7 @@ gulp.task('js', ['clean'], function() {
 // Development Server
 gulp.task('serve', function() {
   connect.server({
-    root: 'app',
+    root: 'build',
     liveReload: true
   });
 });
@@ -78,7 +78,7 @@ gulp.task('test', function(done) {
 });
 
 // Watch files and build
-gulp.task('watch', ['serve', 'watch']);
+gulp.task('dev', ['serve', 'watch']);
 
 // Default task
 // Build the gulp components from scratch
