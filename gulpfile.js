@@ -29,7 +29,7 @@ gulp.task('clean', function(done) {
 });
 
 // HTML
-gulp.task('html', ['clean'], function() {
+gulp.task('html', function() {
   return gulp.src(paths.html)
     .pipe(htmlhint())
     .pipe(minifyHTML())
@@ -37,7 +37,7 @@ gulp.task('html', ['clean'], function() {
 });
 
 // CSS
-gulp.task('css', ['clean'], function() {
+gulp.task('css', function() {
   return gulp.src(paths.css)
     .pipe(csslint('.csslintrc'))
     .pipe(csslint.reporter())
@@ -47,7 +47,7 @@ gulp.task('css', ['clean'], function() {
 });
 
 // Javascript
-gulp.task('js', ['clean'], function() {
+gulp.task('js', function() {
   return gulp.src(paths.js)
     .pipe(eslint({configFile: '.eslintrc'}))
     .pipe(eslint.failOnError())
