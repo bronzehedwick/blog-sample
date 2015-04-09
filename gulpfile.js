@@ -10,6 +10,7 @@ var gulp     = require('gulp'),
   watch      = require('gulp-watch'),
   connect    = require('gulp-connect'),
   karma      = require('karma').server,
+  bower      = require('gulp-bower'),
   del        = require('del');
 
 // Define some paths
@@ -53,6 +54,11 @@ gulp.task('js', ['clean'], function() {
     .pipe(concat('app.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest(paths.buildJs));
+});
+
+// Install bower dependencies
+gulp.task('bower', function() {
+  return bower('./src/js/vendor');
 });
 
 // Development Server
