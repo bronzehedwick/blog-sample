@@ -3,18 +3,7 @@
     "browser": true
   },
   "globals": {
-    "Drupal": true,
-    "jQuery": true,
-    "$": true,
-    "_": true,
-    "Modernizr": true,
-    "CKEDITOR": true,
-    "WURFL": true,
-    "player": true,
-    "Stripe": true,
-    "YT": true,
-    "Munchkin": true,
-    "ga": true
+    "fetch": true
   },
   "rules": {
     // Errors.
@@ -54,6 +43,7 @@
     "no-shadow": 0,
     "no-underscore-dangle": 0,
     "no-use-before-define": 0,
-    "quotes": 0
+    "quotes": 0,
+    "no-console": 0
   }
 }
