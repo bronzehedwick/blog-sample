@@ -10,7 +10,6 @@ var gulp     = require('gulp'),
   watch      = require('gulp-watch'),
   connect    = require('gulp-connect'),
   karma      = require('karma').server,
-  bower      = require('gulp-bower'),
   del        = require('del');
 
 // Define some paths
@@ -43,7 +42,7 @@ gulp.task('css', function() {
     .pipe(csslint('.csslintrc'))
     .pipe(csslint.reporter())
     .pipe(concat('styles.min.css'))
-    .pipe(minifyCSS())
+//    .pipe(minifyCSS())
     .pipe(gulp.dest(paths.buildCss));
 });
 
@@ -52,7 +51,7 @@ gulp.task('js', function() {
   return gulp.src(paths.js)
     .pipe(eslint({configFile: '.eslintrc'}))
     .pipe(concat('app.min.js'))
-    .pipe(uglify())
+//    .pipe(uglify())
     .pipe(gulp.dest(paths.buildJs));
 });
 
@@ -62,11 +61,6 @@ gulp.task('data', function() {
     './src/data/posts.json'
   ])
   .pipe(gulp.dest(paths.data));
-});
-
-// Install bower dependencies
-gulp.task('bower', function() {
-  return bower('./src/js/vendor');
 });
 
 // Development Server
