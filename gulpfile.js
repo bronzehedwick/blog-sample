@@ -42,7 +42,7 @@ gulp.task('css', function() {
     .pipe(csslint('.csslintrc'))
     .pipe(csslint.reporter())
     .pipe(concat('styles.min.css'))
-//    .pipe(minifyCSS())
+    .pipe(minifyCSS())
     .pipe(gulp.dest(paths.buildCss));
 });
 
@@ -51,7 +51,7 @@ gulp.task('js', function() {
   return gulp.src(paths.js)
     .pipe(eslint({configFile: '.eslintrc'}))
     .pipe(concat('app.min.js'))
-//    .pipe(uglify())
+    .pipe(uglify())
     .pipe(gulp.dest(paths.buildJs));
 });
 
