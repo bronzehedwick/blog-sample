@@ -1,27 +1,35 @@
 (function sampleBlog() {
   'use strict';
 
+  const mobileBreak = 721;
+
   function postLink(link, post) {
     link.addEventListener('click', function(e) {
-      var mainEl = document.getElementById('main');
-      mainEl.setAttribute('style', 'display:none;');
-      mainEl.innerHTML = '';
+      var contentEl = document.getElementById('content');
+          contentEl.setAttribute('style', 'display:none;');
+          contentEl.innerHTML = '';
+
       history.pushState(null, null, link.href);
       e.preventDefault();
+
       parsePost(post, link.href);
     }, false);
   }
 
   function parsePost(post, id) {
     var articleEl = document.createElement('article'),
-      headingEl = document.createElement('heading'),
-      h2El      = document.createElement('h2'),
-      aEl       = document.createElement('a'),
-      timeEl    = document.createElement('time'),
-      imgEl     = document.createElement('img'),
-      pEl       = document.createElement('p'),
-      mainEl    = document.getElementById('main'),
-      date      = new Date(post.date);
+        headingEl = document.createElement('heading'),
+        h2El      = document.createElement('h2'),
+        aEl       = document.createElement('a'),
+        timeEl    = document.createElement('time'),
+        imgEl     = document.createElement('img'),
+        pEl       = document.createElement('p'),
+        contentEl = document.getElementById('content'),
+        date      = new Date(post.date);
+
+    if (window.innerWidth < mobileBreak) {
+      articleEl.setAttribute('class', 'swiper-slide');
+    }
 
     aEl.href = id;
     postLink(aEl, post);
@@ -38,8 +46,8 @@
     articleEl.appendChild(imgEl);
     articleEl.appendChild(pEl);
 
-    mainEl.appendChild(articleEl);
-    mainEl.setAttribute('style', 'display:block;');
+    contentEl.appendChild(articleEl);
+    contentEl.setAttribute('style', 'display:block;');
   }
 
   function parsePosts(posts) {
@@ -50,11 +58,30 @@
     }
 
     window.onpopstate = function(e) {
-      var mainEl = document.getElementById('main');
-      mainEl.innerHTML = '';
+      var contentEl = document.getElementById('content');
+      contentEl.innerHTML = '';
       parsePosts(posts);
     };
+
+    if (window.innerWidth < mobileBreak) {
+     var mainEl    = document.getElementById('main'),
+         contentEl = document.getElementById('content');
+
+      mainEl.setAttribute('class', 'swiper-container');
+      contentEl.setAttribute('class', 'swiper-wrapper');
+
+      var swiper = new Swiper ('.swiper-container', {
+        // Optional parameters
+        direction: 'horizontal',
+        loop: true,
+      });
+    }
   }
+
+  window.addEventListener('load', function(e) {
+    if (window.innerWidth < mobileBreak) {
+    }
+  });
 
   // Fetch post data
   fetch('../data/posts.json')
