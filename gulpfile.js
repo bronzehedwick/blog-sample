@@ -20,7 +20,8 @@ var paths = {
   js: './src/js/**/*.js',
   buildHtml: './build',
   buildCss: './build/css',
-  buildJs: './build/js'
+  buildJs: './build/js',
+  data: './build/data'
 };
 
 // Clean the build directory
@@ -50,10 +51,17 @@ gulp.task('css', function() {
 gulp.task('js', function() {
   return gulp.src(paths.js)
     .pipe(eslint({configFile: '.eslintrc'}))
-    .pipe(eslint.failOnError())
     .pipe(concat('app.min.js'))
     .pipe(uglify())
     .pipe(gulp.dest(paths.buildJs));
+});
+
+// Copy data files to build directory
+gulp.task('data', function() {
+  gulp.src([
+    './src/data/posts.json'
+  ])
+  .pipe(gulp.dest(paths.data));
 });
 
 // Install bower dependencies
@@ -86,6 +94,5 @@ gulp.task('test', function(done) {
 // Watch files and build
 gulp.task('dev', ['serve', 'watch']);
 
-// Default task
-// Build the gulp components from scratch
-gulp.task('default', ['html', 'css', 'js']);
+// Default task; build the gulp components from scratch
+gulp.task('default', ['html', 'css', 'js', 'data']);
