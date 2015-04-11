@@ -5,9 +5,9 @@
 
   function postLink(link, post) {
     link.addEventListener('click', function(e) {
-      var contentEl = document.getElementById('content');
-          contentEl.setAttribute('style', 'display:none;');
-          contentEl.innerHTML = '';
+      var mainEl = document.getElementById('main');
+          mainEl.setAttribute('style', 'display:none;');
+          mainEl.innerHTML = '';
 
       history.pushState(null, null, link.href);
       e.preventDefault();
@@ -17,20 +17,17 @@
   }
 
   function parsePost(post, id) {
-    var articleEl = document.createElement('article'),
+    var mainEl    = document.getElementById('main'),
+        articleEl = document.createElement('article'),
         headingEl = document.createElement('heading'),
         h2El      = document.createElement('h2'),
         aEl       = document.createElement('a'),
         timeEl    = document.createElement('time'),
         imgEl     = document.createElement('img'),
         pEl       = document.createElement('p'),
-        contentEl = document.getElementById('content'),
         date      = new Date(post.date);
 
-    if (window.innerWidth < mobileBreak) {
-      articleEl.setAttribute('class', 'swiper-slide');
-    }
-
+    articleEl.setAttribute('class', 'dragend-page');
     aEl.href = id;
     postLink(aEl, post);
     h2El.innerHTML = post.title;
@@ -46,8 +43,8 @@
     articleEl.appendChild(imgEl);
     articleEl.appendChild(pEl);
 
-    contentEl.appendChild(articleEl);
-    contentEl.setAttribute('style', 'display:block;');
+    mainEl.appendChild(articleEl);
+    mainEl.setAttribute('style', 'display:block;');
   }
 
   function parsePosts(posts) {
@@ -58,23 +55,14 @@
     }
 
     window.onpopstate = function(e) {
-      var contentEl = document.getElementById('content');
-      contentEl.innerHTML = '';
+      var mainEl = document.getElementById('main');
+      mainEl.innerHTML = '';
       parsePosts(posts);
     };
 
     if (window.innerWidth < mobileBreak) {
-     var mainEl    = document.getElementById('main'),
-         contentEl = document.getElementById('content');
-
-      mainEl.setAttribute('class', 'swiper-container');
-      contentEl.setAttribute('class', 'swiper-wrapper');
-
-      var swiper = new Swiper ('.swiper-container', {
-        // Optional parameters
-        direction: 'horizontal',
-        loop: true,
-      });
+      var mainEl  = document.getElementById('main'),
+          dragend = new Dragend(mainEl, {pageClass: 'dragend-page', direction: 'horizontal'});
     }
   }
 

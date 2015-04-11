@@ -3,7 +3,8 @@
     "browser": true
   },
   "globals": {
-    "fetch": true
+    "fetch": true,
+    "Dragend": true
   },
   "rules": {
     // Errors.
