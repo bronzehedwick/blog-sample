@@ -33,7 +33,7 @@
     h2El.innerHTML = post.title;
     timeEl.setAttribute('datetime', date);
     timeEl.innerHTML = (date.getMonth() + 1) + '/' + date.getDay() + '/' + date.getFullYear();
-    imgEl.src = post.image;
+    imgEl.src = window.location.origin + '/images/' + post.image;
     pEl.innerHTML = post.description;
 
     aEl.appendChild(h2El);

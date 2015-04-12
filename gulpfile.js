@@ -10,6 +10,7 @@ var gulp     = require('gulp'),
   watch      = require('gulp-watch'),
   connect    = require('gulp-connect'),
   karma      = require('karma').server,
+  imageop    = require('gulp-image-optimization'),
   del        = require('del');
 
 // Define some paths
@@ -17,10 +18,11 @@ var paths = {
   html: './src/index.html',
   css: './src/css/**/*.css',
   js: './src/js/**/*.js',
+  data: './src/data/**/*.json',
   buildHtml: './build',
   buildCss: './build/css',
   buildJs: './build/js',
-  data: './build/data'
+  buildData: './build/data'
 };
 
 // Clean the build directory
@@ -55,12 +57,18 @@ gulp.task('js', function() {
     .pipe(gulp.dest(paths.buildJs));
 });
 
+gulp.task('images', function(cb) {
+    gulp.src(['src/**/*.png','src/**/*.jpg','src/**/*.gif','src/**/*.jpeg']).pipe(imageop({
+        optimizationLevel: 5,
+        progressive: true,
+        interlaced: true
+    })).pipe(gulp.dest(paths.buildHtml)).on('end', cb).on('error', cb);
+});
+
 // Copy data files to build directory
-gulp.task('data', function() {
-  gulp.src([
-    './src/data/posts.json'
-  ])
-  .pipe(gulp.dest(paths.data));
+gulp.task('copy', function() {
+  gulp.src([paths.data])
+  .pipe(gulp.dest(paths.buildData));
 });
 
 // Development Server
@@ -76,6 +84,7 @@ gulp.task('watch', function() {
   gulp.watch([paths.html], ['html']);
   gulp.watch([paths.css], ['css']);
   gulp.watch([paths.js], ['js']);
+  gulp.watch([paths.data], ['copy']);
 });
 
 // Run unit / functional tests
@@ -89,4 +98,4 @@ gulp.task('test', function(done) {
 gulp.task('dev', ['serve', 'watch']);
 
 // Default task; build the gulp components from scratch
-gulp.task('default', ['html', 'css', 'js', 'data']);
+gulp.task('default', ['html', 'css', 'js', 'images', 'copy']);
