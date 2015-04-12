@@ -1,4 +1,52 @@
-.swiper-container {
-  /*width: 600px;*/
-  /*height: 300px;*/
+.content {
+  color: #444;
+  line-height: 1.5em;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+  .content {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+a:link,
+a:visited,
+a:active {
+  color: #0074d9;
+  text-decoration: none;
+  transition: color 0.1s;
+}
+
+a:hover {
+  color: #7fdbff;
+  transition: color 0.1s;
+}
+
+.page-heading {
+  text-align: center;
+}
+
+.publish-date,
+.thumbnail {
+  display: block;
+}
+
+.thumbnail {
+  float: left;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.publish-date {
+  font-weight: 700;
+}
+
+.tags {
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #f1f1f1;
 }

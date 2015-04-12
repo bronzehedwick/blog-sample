@@ -53,8 +53,10 @@
     postLink(aEl, post);
     h2El.innerHTML = post.title;
     timeEl.setAttribute('datetime', date);
-    timeEl.innerHTML = (date.getMonth() + 1) + '/' + date.getDay() + '/' + date.getFullYear();
+    timeEl.setAttribute('class', 'publish-date');
+    timeEl.innerHTML = 'Posted: ' + (date.getMonth() + 1) + '/' + date.getDay() + '/' + date.getFullYear();
     imgEl.src = window.location.origin + '/images/' + post.image;
+    imgEl.setAttribute('class', 'thumbnail');
     pEl.innerHTML = post.description;
 
     tagsEl.setAttribute('class', 'tags');
