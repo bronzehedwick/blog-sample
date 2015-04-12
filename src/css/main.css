@@ -18,11 +18,15 @@ a:visited,
 a:active {
   color: #0074d9;
   text-decoration: none;
+  -webkit-transition: color 0.1s;
+  -moz-transition: color 0.1s;
   transition: color 0.1s;
 }
 
 a:hover {
   color: #7fdbff;
+  -webkit-transition: color 0.1s;
+  -moz-transition: color 0.1s;
   transition: color 0.1s;
 }
 
