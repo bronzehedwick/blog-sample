@@ -52,7 +52,7 @@ gulp.task('css', function() {
 gulp.task('js', function() {
   return gulp.src(paths.js)
     .pipe(eslint({configFile: '.eslintrc'}))
-    .pipe(concat('app.min.js'))
+    //.pipe(concat('app.min.js'))
     //.pipe(uglify())
     .pipe(gulp.dest(paths.buildJs));
 });
